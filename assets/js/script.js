@@ -1,4 +1,4 @@
-fetch("../json/data.json")
+fetch("assets/json/data.json")
     .then(response => response.json())
     .then(rawData => {
         const data = { nodes: [], links: [] };
