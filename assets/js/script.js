@@ -1,5 +1,5 @@
 // Determine which JSON file to load based on the URL hash
-const defaultJson = "assets/json/data.json"; // Default JSON file
+const defaultJson = "assets/json/graph.json"; // Default JSON file
 const hash = window.location.hash.substring(1); // Get the hash from the URL
 const jsonFile = hash ? `assets/json/${hash}.json` : defaultJson; // Construct JSON filename
 
