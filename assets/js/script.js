@@ -1,6 +1,21 @@
-fetch("assets/json/data.json")
-    .then(response => response.json())
+// Determine which JSON file to load based on the URL hash
+const defaultJson = "assets/json/data.json"; // Default JSON file
+const hash = window.location.hash.substring(1); // Get the hash from the URL
+const jsonFile = hash ? `assets/json/${hash}.json` : defaultJson; // Construct JSON filename
+
+fetch(jsonFile)
+    .then(response => {
+        if (!response.ok) throw new Error(`Failed to load JSON: ${jsonFile}`);
+        return response.json();
+    })
     .then(rawData => {
+        console.log(`Loaded JSON file: ${jsonFile}`);
+        // Update the header dynamically
+        if (rawData.header) {
+            const { title, description } = rawData.header;
+            document.getElementById("title").textContent = title || "Dynamic Graph";
+            document.getElementById("description").textContent = description || "Explore dynamic relationships.";
+        }
         const data = { nodes: [], links: [] };
         const customNodes = {}; // To track custom nodes for toggle functionality
 
@@ -240,3 +255,7 @@ fetch("assets/json/data.json")
         }        
         
     });
+    window.addEventListener("hashchange", () => {
+        location.reload();
+    });
+    
