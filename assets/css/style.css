@@ -9,7 +9,7 @@ body {
 
 #header {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     background: #282828;
     border-bottom: 2px solid #ffcc00;
 }
@@ -21,7 +21,7 @@ body {
 }
 
 #header p {
-    margin: 5px 0;
+    margin: 0px 0;
     font-size: 1.2rem;
 }
 
@@ -45,6 +45,62 @@ body {
 
 #buttons button:hover {
     background: #3e8e41;
+}
+#buttons-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Main button */
+#load-json-files {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#load-json-files:hover {
+    background: #3e8e41;
+}
+
+/* Dropdown list */
+#json-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    background: #222;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    width: 200px;
+    max-height: 250px;
+    overflow-y: auto;
+    display: none; /* Initially hidden */
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+#json-list li {
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#json-list li:hover {
+    background: #4CAF50;
+}
+
+/* Show list when active */
+#json-list.show {
+    display: block;
 }
 
 #chart {

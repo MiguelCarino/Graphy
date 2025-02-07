@@ -2,6 +2,51 @@
 const defaultJson = "assets/json/graph.json"; // Default JSON file
 const hash = window.location.hash.substring(1); // Get the hash from the URL
 const jsonFile = hash ? `assets/json/${hash}.json` : defaultJson; // Construct JSON filename
+const jsonFiles = [
+    "graph.json",
+    "linux.json",
+    "demo.json",
+    "musictheory.json"
+];
+
+document.getElementById("load-json-files").addEventListener("click", toggleJsonList);
+
+function toggleJsonList() {
+    const jsonList = document.getElementById("json-list");
+    if (jsonList.classList.contains("show")) {
+        jsonList.classList.remove("show");
+    } else {
+        displayJsonList(jsonFiles);
+        jsonList.classList.add("show");
+    }
+}
+
+function displayJsonList(jsonFiles) {
+    const jsonList = document.getElementById("json-list");
+    jsonList.innerHTML = ""; // Clear previous list
+
+    jsonFiles.forEach(file => {
+        const fileName = file.replace(".json", "");
+        const listItem = document.createElement("li");
+        listItem.innerText = fileName;
+        listItem.onclick = () => {
+            window.location.hash = fileName;
+            location.reload(); // Reload with selected JSON file
+        };
+        jsonList.appendChild(listItem);
+    });
+}
+
+// Close list when clicking outside
+document.addEventListener("click", (event) => {
+    const jsonList = document.getElementById("json-list");
+    const loadJsonButton = document.getElementById("load-json-files");
+
+    if (!jsonList.contains(event.target) && event.target !== loadJsonButton) {
+        jsonList.classList.remove("show");
+    }
+});
+
 
 fetch(jsonFile)
     .then(response => {
