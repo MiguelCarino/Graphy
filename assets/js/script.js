@@ -90,8 +90,8 @@ fetch(jsonFile)
         const svgGroup = svg.append("g");
 
         const simulation = d3.forceSimulation(data.nodes)
-            .force("link", d3.forceLink(data.links).id(d => d.id).distance(150))
-            .force("charge", d3.forceManyBody().strength(-500))
+            .force("link", d3.forceLink(data.links).id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-150))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         // Draw links
@@ -107,7 +107,7 @@ fetch(jsonFile)
             .data(data.nodes)
             .enter()
             .append("circle")
-            .attr("r", 14)
+            .attr("r", 15)
             .attr("fill", d => d3.schemeCategory10[d.group % 10])
             .call(d3.drag()
                 .on("start", dragstarted)
@@ -121,7 +121,7 @@ fetch(jsonFile)
             .enter()
             .append("text")
             .text(d => d.id)
-            .attr("font-size", 20)
+            .attr("font-size", 22)
             .attr("fill", "#fff")
             .attr("cursor", d => d.link ? "pointer" : "default")
             .on("click", (_, d) => {
