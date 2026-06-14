@@ -1,109 +1,219 @@
+:root {
+  --bg:           #050505;
+  --bg-header:    #050505;
+  --accent:       #eab308;
+  --accent-faint: rgba(234, 179, 8, 0.05);
+  --accent-glow:  rgba(234, 179, 8, 0.15);
+  --accent-dim:   rgba(234, 179, 8, 0.3);
+  --border:       #262626;
+  --text:         #ffffff;
+  --text-sec:     #a3a3a3;
+  --text-muted:   #666666;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
-    font-family: 'Noto Sans JP', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom right, #1f1f1f, #343434);
-    color: #fff;
-    overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-#header {
-    text-align: center;
-    padding: 10px;
-    background: #282828;
-    border-bottom: 2px solid #ffcc00;
+/* ─── TOP HEADER ─────────────────────────────────────── */
+.top-header {
+  height: 70px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #0f0f0f 0%, #050505 100%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  gap: 16px;
+  position: relative;
+  z-index: 100;
 }
 
-#header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    color: #ffcc00;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex: 1;
 }
 
-#header p {
-    margin: 0px 0;
-    font-size: 1.2rem;
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
-#buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+/* CS home icon */
+.cs-home {
+  flex-shrink: 0;
 }
 
-#buttons button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    background: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s;
+/* Page name */
+.page-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(130deg, #fef08a 0%, #eab308 50%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-#buttons button:hover {
-    background: #3e8e41;
-}
-#buttons-container {
-    position: absolute;
-    top: 90px;
-    right: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+/* Graph title + description (inline, after a divider) */
+.graph-info {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  border-left: 1px solid var(--border);
+  padding-left: 16px;
+  min-width: 0;
 }
 
-/* Main button */
+#title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+#description {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Icon buttons */
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: 0.2s;
+  text-decoration: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.icon-btn:hover {
+  border-color: var(--accent);
+  color: var(--bg-header);
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+.icon-btn svg { width: 15px; height: 15px; }
+
+.social-row { display: flex; gap: 8px; }
+
+/* Topic selector */
+.topic-selector { position: relative; }
+
 #load-json-files {
-    margin: 0 10px;
-    padding: 10px 20px;
-    background: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s;
+  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid var(--accent-dim);
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
 }
-
 #load-json-files:hover {
-    background: #3e8e41;
+  border-color: var(--accent);
+  background: var(--accent-faint);
 }
 
-/* Dropdown list */
 #json-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 5px;
-    background: #222;
-    border: 1px solid #4CAF50;
-    border-radius: 5px;
-    width: 200px;
-    max-height: 250px;
-    overflow-y: auto;
-    display: none; /* Initially hidden */
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  list-style: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: #111;
+  border: 1px solid var(--accent-dim);
+  border-radius: 4px;
+  width: 210px;
+  max-height: 260px;
+  overflow-y: auto;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+  z-index: 300;
+  padding: 4px 0;
 }
+#json-list.show { display: block; }
 
 #json-list li {
-    padding: 10px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
+  padding: 10px 14px;
+  color: var(--text-sec);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
-
 #json-list li:hover {
-    background: #4CAF50;
+  background: var(--accent-faint);
+  color: var(--accent);
 }
 
-/* Show list when active */
-#json-list.show {
-    display: block;
+/* Custom node buttons */
+#buttons { display: flex; gap: 8px; }
+
+#buttons button {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-sec);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+#buttons button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-faint);
 }
 
+/* ─── CHART ─────────────────────────────────────────── */
 #chart {
-    width: 100%;
-    height: calc(100vh - 120px);
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ─── MOBILE ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .graph-info { display: none; }
+  .top-header { padding: 0 15px; }
 }

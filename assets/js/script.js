@@ -73,8 +73,9 @@ fetch(jsonFile)
             });
         });
 
-        const width = window.innerWidth;
-        const height = window.innerHeight - 120;
+        const chartEl = document.getElementById('chart');
+        const width = chartEl.clientWidth;
+        const height = chartEl.clientHeight;
 
         // Create SVG canvas
         const svg = d3.select("#chart")
@@ -162,11 +163,11 @@ fetch(jsonFile)
         function highlightConnections(nodeId) {
             console.log(`Highlighting connections for node "${nodeId}".`);
             link.attr("stroke", l =>
-                l.source.id === nodeId || l.target.id === nodeId ? "#ffcc00" : "#999"
+                l.source.id === nodeId || l.target.id === nodeId ? "#eab308" : "#999"
             );
             node.attr("fill", n =>
                 n.id === nodeId || data.links.some(l => (l.source.id === nodeId && l.target.id === n.id) || (l.target.id === nodeId && l.source.id === n.id))
-                    ? "#ffcc00"
+                    ? "#eab308"
                     : d3.schemeCategory10[n.group % 10]
             );        
         
